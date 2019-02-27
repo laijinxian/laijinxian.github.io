@@ -1304,8 +1304,8 @@ a {
 }
 
 #header .header-nav .social a.wechat {
-  background: url(/img/wechat.png) center no-repeat #000;
-  border: 1px solid #000
+  background: url(/img/wechat.png) center no-repeat #00FF00;
+  border: 1px solid #00FF00
 }
 
 #header .header-nav .social a.wechat:hover {
@@ -1672,7 +1672,7 @@ a {
   font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
   word-wrap: break-word;
   font-size: 14px;
-  color: #bc8f8f
+  color: #FF7F50
 }
 
 .article-entry blockquote p {
@@ -2266,7 +2266,7 @@ a {
 }
 
 .article-entry code {
-  background: #eee;
+  /*background: #eee;*/
   padding: 0 .3em;
   border: none
 }
@@ -2286,14 +2286,15 @@ a {
 
 .article-entry p code {
   margin: 0 3px;
-  border: 1px dashed #000;
-  color: #fff;
-  font-size: 90%;
+  /*border: 1px dashed #000;*/
+  /*color: #fff;*/
+  font-size: 90%
+  color: #FF7F50;;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   font-family: Consolas, "Courier New", Courier;
   text-shadow: none;
-  background-color: #002b36
+  /*background-color: #002b36*/
 }
 
 .article-entry p a {

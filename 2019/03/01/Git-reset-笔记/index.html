@@ -7,23 +7,20 @@
   
   
   
-  <title>Git常规使用方法 | 正在奔跑的前端小白</title>
+  <title>Git reset 笔记 | 正在奔跑的前端小白</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git常规使用方法： 版本控制利器 Git,提升开发效率">
+  <meta name="description" content="Git reset 笔记： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
 <meta name="keywords" content="Git&#x2F;GitLab&#x2F;GitHub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git常规使用方法">
-<meta property="og:url" content="http://yoursite.com/2019/02/27/Git常规使用方法/index.html">
+<meta property="og:title" content="Git reset 笔记">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/Git-reset-笔记/index.html">
 <meta property="og:site_name" content="正在奔跑的前端小白">
-<meta property="og:description" content="Git常规使用方法： 版本控制利器 Git,提升开发效率">
+<meta property="og:description" content="Git reset 笔记： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513229819780&di=82f199f26b69cbc7a99cf13ed269185f&imgtype=0&src=http%3A%2F%2Fimages0.cnblogs.com%2Fnews%2F1%2F201506%2F090809215823690.jpg">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3003454-e2c7e55f099791fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
-<meta property="og:updated_time" content="2019-03-04T04:20:42.530Z">
+<meta property="og:updated_time" content="2019-03-04T04:20:41.507Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git常规使用方法">
-<meta name="twitter:description" content="Git常规使用方法： 版本控制利器 Git,提升开发效率">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513229819780&di=82f199f26b69cbc7a99cf13ed269185f&imgtype=0&src=http%3A%2F%2Fimages0.cnblogs.com%2Fnews%2F1%2F201506%2F090809215823690.jpg">
+<meta name="twitter:title" content="Git reset 笔记">
+<meta name="twitter:description" content="Git reset 笔记： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
   
     <link rel="alternative" href="/atom.xml" title="正在奔跑的前端小白" type="application/atom+xml">
   
@@ -261,11 +258,11 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Git常规使用方法" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Git-reset-笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/02/27/Git常规使用方法/" class="article-date">
-      <time datetime="2019-02-27T06:40:53.000Z" itemprop="datePublished">2019-02-27</time>
+      <a href="/2019/03/01/Git-reset-笔记/" class="article-date">
+      <time datetime="2019-03-01T03:06:08.000Z" itemprop="datePublished">2019-03-01</time>
 </a>
 
     </div>
@@ -279,7 +276,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Git常规使用方法
+      Git reset 笔记
     </h1>
   
 
@@ -305,134 +302,32 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong> Git常规使用方法：</strong> <excerpt in index | 首页摘要><br>版本控制利器 Git,提升开发效率<br><a id="more"></a></excerpt></p>
+        <p><strong> Git reset 笔记：</strong> <excerpt in index | 首页摘要><br>使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit<br><a id="more"></a></excerpt></p>
 <p><the rest of contents | 余下全文></the></p>
-<h2 id="角色权限"><a href="#角色权限" class="headerlink" title="角色权限"></a>角色权限</h2><table>
-<thead>
-<tr>
-<th>角色</th>
-<th>权限</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Owner</td>
-<td>项目所有者，拥有所有的操作权限</td>
-<td>最高权限</td>
-</tr>
-<tr>
-<td>Master</td>
-<td>项目的管理者，除更改、删除项目元信息外其它操作均可</td>
-<td>负责master等受保护分支的merge工作等</td>
-</tr>
-<tr>
-<td>Developer</td>
-<td>项目的开发人员，做一些开发工作，对受保护内容无权限</td>
-<td>可以创建远程分支，创建merge请求，  接受merge请求？</td>
-</tr>
-<tr>
-<td>Reporter</td>
-<td>项目的报告者，只有项目的读权限，可以创建代码片断</td>
-<td>不能创建远程分支，  创建merge请求？</td>
-</tr>
-<tr>
-<td>Guest</td>
-<td>项目的游客，只能提交问题和评论内容</td>
-<td>只能issue等</td>
-</tr>
-</tbody>
-</table>
-<p>具体请看官方文档：<a href="https://docs.gitlab.com/ee/user/permissions.html" target="_blank" rel="noopener">https://docs.gitlab.com/ee/user/permissions.html</a></p>
-<hr>
-<h2 id="分支定义"><a href="#分支定义" class="headerlink" title="分支定义"></a>分支定义</h2><table>
-<thead>
-<tr>
-<th>分支名称</th>
-<th>定义</th>
-<th>人员</th>
-<th>环境</th>
-<th>保护分支</th>
-<th>稳定分支</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>master</td>
-<td>主分支</td>
-<td>顶级负责人Master</td>
-<td>生产环境</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>r-预发布版本号</td>
-<td>预发布分支</td>
-<td>顶级负责人Master</td>
-<td>预发布环境</td>
-<td>是</td>
-<td></td>
-</tr>
-<tr>
-<td>dev</td>
-<td>开发分支</td>
-<td>项目负责人Master</td>
-<td>测试环境</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>b-BUG编号</td>
-<td>Bug修复分支</td>
-<td>开发者Developer</td>
-<td>测试环境</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>f-特性名称</td>
-<td>特性分支</td>
-<td>开发者Developer</td>
-<td>开发环境</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>f-特性名称-coder</td>
-<td>特性分支-开发者</td>
-<td>开发者Developer</td>
-<td>开发环境</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>t-发布版本号</td>
-<td>发布版本标签</td>
-<td>all</td>
-<td>all</td>
-<td>是</td>
-</tr>
-</tbody>
-</table>
-<h2 id="一般使用方法"><a href="#一般使用方法" class="headerlink" title="一般使用方法"></a>一般使用方法</h2><h3 id="1-克隆"><a href="#1-克隆" class="headerlink" title="1. 克隆"></a>1. 克隆</h3><p>git clone  &lt;仓库地址&gt;</p>
-<h3 id="2-查看所有分支"><a href="#2-查看所有分支" class="headerlink" title="2. 查看所有分支"></a>2. 查看所有分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br><span class="line"><span class="comment"># 查看是否有origin/dev分支，服务器默认已建立dev分支，如果没有，则请Master角色先建立该分支：</span></span><br><span class="line"><span class="comment"># 方法1：clone版本哭，新建本地dev分支并push到服务器：git clone ; git branch dev ; git checkout dev ; git push。</span></span><br><span class="line"><span class="comment"># 方法2：直接在gilab上建立dev分支</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-切换到dev分支"><a href="#3-切换到dev分支" class="headerlink" title="3. 切换到dev分支"></a>3. 切换到dev分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev    <span class="comment">#--- 可能是git checkout -b dev origin/dev，建立进入分支，并关联</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-基于dev分支创建自己的分支-lt-分支名称-gt"><a href="#4-基于dev分支创建自己的分支-lt-分支名称-gt" class="headerlink" title="4. 基于dev分支创建自己的分支&lt;分支名称&gt;"></a>4. 基于dev分支创建自己的分支&lt;分支名称&gt;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">git branch  &lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="5-切换到-lt-分支名称-gt-，然后愉快的coding"><a href="#5-切换到-lt-分支名称-gt-，然后愉快的coding" class="headerlink" title="5. 切换到&lt;分支名称&gt;，然后愉快的coding"></a>5. 切换到&lt;分支名称&gt;，然后愉快的coding</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout  &lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1513229819780&amp;di=82f199f26b69cbc7a99cf13ed269185f&amp;imgtype=0&amp;src=http%3A%2F%2Fimages0.cnblogs.com%2Fnews%2F1%2F201506%2F090809215823690.jpg" alt="yuan"></p>
-<h3 id="6-加到暂存区"><a href="#6-加到暂存区" class="headerlink" title="6. 加到暂存区"></a>6. 加到暂存区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br></pre></td></tr></table></figure>
-<h3 id="7-可随时检查工作区状态"><a href="#7-可随时检查工作区状态" class="headerlink" title="7. 可随时检查工作区状态"></a>7. 可随时检查工作区状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前分支工作区是否有未跟踪的文件（即是否有未添加到暂存区的文件）</span></span><br><span class="line">git status</span><br><span class="line"><span class="comment"># 查看当前分支工作区的文件与暂存区文件的差异</span></span><br><span class="line">git diff</span><br></pre></td></tr></table></figure>
-<h3 id="8-提交到本地仓库"><a href="#8-提交到本地仓库" class="headerlink" title="8. 提交到本地仓库"></a>8. 提交到本地仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"说明"</span></span><br></pre></td></tr></table></figure>
-<h3 id="9-推送到服务器仓库"><a href="#9-推送到服务器仓库" class="headerlink" title="9. 推送到服务器仓库"></a>9. 推送到服务器仓库</h3><p>也可以不推送到服务器，只放在本地仓库，例如仅本人使用的临时分支<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push --<span class="built_in">set</span>-upstream origin &lt;分支名称&gt;     <span class="comment">#--- 设置关联，也会顺便推送，仅在第一次时用</span></span><br><span class="line">git push origin</span><br></pre></td></tr></table></figure></p>
-<h3 id="10-合并到dev分支（例）"><a href="#10-合并到dev分支（例）" class="headerlink" title="10. 合并到dev分支（例）"></a>10. 合并到dev分支（例）</h3><h4 id="A-Developer在网页上请求合并（推荐）"><a href="#A-Developer在网页上请求合并（推荐）" class="headerlink" title="A. Developer在网页上请求合并（推荐）"></a>A. Developer在网页上请求合并（推荐）</h4><p>网页上请求合并还可以顺便进行代码审查，里程碑设置等<br>参考：<br>gitlab如何实现代码评审机制（通过角色管理控制）: <a href="http://www.jianshu.com/p/adb598c52e84" target="_blank" rel="noopener">http://www.jianshu.com/p/adb598c52e84</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3003454-e2c7e55f099791fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt><br>如果出现冲突，开发人员将服务器最新的版本pull下来，然后将dev分支合并到自己的分支<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line">git checkout  &lt;分支名称&gt;</span><br><span class="line">git merge --no-ff  dev</span><br></pre></td></tr></table></figure></p>
-<p>如果有冲突，则参照上面的参考链接解决，或直接按【B. Master角色直接本地合并】中的方法解决</p>
-<h4 id="B-Master角色直接本地合并"><a href="#B-Master角色直接本地合并" class="headerlink" title="B. Master角色直接本地合并"></a>B. Master角色直接本地合并</h4><p>dev是保护分支，只有Master角色（例，看设置的分支保护权限）才有权限进行合并<br>将本地分支&lt;分支名称&gt;合并到本地dev分支，必须先从服务器pull最新代码，并切换到dev分支，然后再合并：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git pull  &lt;仓库地址&gt;</span><br><span class="line">git checkout dev</span><br><span class="line">git merge --no-ff &lt;分支名称&gt;</span><br></pre></td></tr></table></figure></p>
-<p>运行merge命令之后，如果有冲突，则需要手动解决冲突，打开冲突文件，你可以看到类似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">。。。</span><br><span class="line">111</span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">222 master do it</span><br><span class="line">=======</span><br><span class="line">222 source do it</span><br><span class="line">333 source jjj</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;分支名称&gt;</span><br><span class="line">。。。</span><br></pre></td></tr></table></figure></p>
-<p>将正确的留下，错误的删除即可，保存退出，然后重新(git add . ; git commit ; git merge )：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"for merge说明"</span></span><br><span class="line">git merge --no-ff &lt;分支名称&gt;</span><br></pre></td></tr></table></figure></p>
-<p>冲突时，也可以撤销合并：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --abort</span><br></pre></td></tr></table></figure></p>
-<h3 id="11-删除分支，切换到master分支然后删除-lt-分支名称-gt-分支（不能删除当前分支）"><a href="#11-删除分支，切换到master分支然后删除-lt-分支名称-gt-分支（不能删除当前分支）" class="headerlink" title="11. 删除分支，切换到master分支然后删除&lt;分支名称&gt;分支（不能删除当前分支）"></a>11. 删除分支，切换到master分支然后删除&lt;分支名称&gt;分支（不能删除当前分支）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git branch -d &lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="12-删除远程，危险，切记只删除自己建立的分支，不要删除公共分支，例如dev、release等"><a href="#12-删除远程，危险，切记只删除自己建立的分支，不要删除公共分支，例如dev、release等" class="headerlink" title="12. 删除远程，危险，切记只删除自己建立的分支，不要删除公共分支，例如dev、release等"></a>12. 删除远程，危险，切记只删除自己建立的分支，不要删除公共分支，例如dev、release等</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :&lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="git区域"><a href="#git区域" class="headerlink" title="git区域"></a>git区域</h3><ul>
+<li>history：仓库</li>
+<li>stage/index : 暂存区</li>
+<li>working directory ：工作区</li>
+</ul>
+<h3 id="三个主要参数"><a href="#三个主要参数" class="headerlink" title="三个主要参数"></a>三个主要参数</h3><ul>
+<li>git reset  –soft    #— 撤销仓库的变更</li>
+<li>git reset  –mixed   #— 撤销仓库、暂存区的变更，默认参数</li>
+<li>git reset  –hard    #— 撤销仓库、暂存区、工作区的变更</li>
+</ul>
+<h2 id="提交级别的撤销"><a href="#提交级别的撤销" class="headerlink" title="提交级别的撤销"></a>提交级别的撤销</h2><p><code>--hard</code>方式，依然可以回到撤销前的状态（即未撤销状态），应该须在没有新的提交的前提下<br>当然最安全的还是默认方式<code>--mixed</code>，可以不指定<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参考：http://blog.csdn.net/carolzhang8406/article/details/49761927</span></span><br><span class="line"><span class="comment">#      http://blog.csdn.net/hbwindy/article/details/51519999</span></span><br><span class="line"><span class="comment"># git log --oneline</span></span><br><span class="line">baa3b06 reg</span><br><span class="line">acd3a02 dir1</span><br><span class="line">45c9eb8 git</span><br><span class="line">e20c051 add README</span><br><span class="line"></span><br><span class="line"><span class="comment"># cat   .git/refs/heads/master</span></span><br><span class="line">baa3b062f99deba7eecb41bffc696070221ed561</span><br><span class="line"></span><br><span class="line"><span class="comment"># git reset --hard ^C  #--- 或git reset --hard acd3a02</span></span><br><span class="line">重置后撤出暂存区的变更：</span><br><span class="line">M	dir1/file1.txt</span><br><span class="line">[root@vt-192-168-11-81-docker1 <span class="built_in">test</span>]<span class="comment"># </span></span><br><span class="line">[root@vt-192-168-11-81-docker1 <span class="built_in">test</span>]<span class="comment"># git status</span></span><br><span class="line"><span class="comment"># 位于分支 master</span></span><br><span class="line"><span class="comment"># 尚未暂存以备提交的变更：</span></span><br><span class="line"><span class="comment">#   （使用 "git add &lt;file&gt;..." 更新要提交的内容）</span></span><br><span class="line"><span class="comment">#   （使用 "git checkout -- &lt;file&gt;..." 丢弃工作区的改动）</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#	修改：      dir1/file1.txt</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">修改尚未加入提交（使用 <span class="string">"git add"</span> 和/或 <span class="string">"git commit -a"</span>）</span><br><span class="line"></span><br><span class="line"><span class="comment"># git log --oneline </span></span><br><span class="line">acd3a02 dir1</span><br><span class="line">45c9eb8 git</span><br><span class="line">e20c051 add README</span><br><span class="line"></span><br><span class="line"><span class="comment"># git reflog </span></span><br><span class="line">acd3a02 HEAD@&#123;0&#125;: reset: moving to HEAD^</span><br><span class="line">baa3b06 HEAD@&#123;1&#125;: commit: reg</span><br><span class="line">acd3a02 HEAD@&#123;2&#125;: <span class="built_in">clone</span>: from http://g.zjlh.lan/zhuhongfeng/test.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># git reset baa3b06    #--- **需要记得先前的ID，如果不记得，用上面的`git reflog`命令**</span></span><br><span class="line"><span class="comment"># git status</span></span><br><span class="line"><span class="comment"># 位于分支 master</span></span><br><span class="line"><span class="comment"># 您的分支领先 'origin/master' 共 1 个提交。</span></span><br><span class="line"><span class="comment">#   （使用 "git push" 来发布您的本地提交）</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">无文件要提交，干净的工作区</span><br></pre></td></tr></table></figure></p>
+<h2 id="文件级别的撤销"><a href="#文件级别的撤销" class="headerlink" title="文件级别的撤销"></a>文件级别的撤销</h2><p>参考：<a href="https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E6%92%A4%E6%B6%88%E6%93%8D%E4%BD%9C" target="_blank" rel="noopener">https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E6%92%A4%E6%B6%88%E6%93%8D%E4%BD%9C</a></p>
+<h3 id="取消已经暂存的文件"><a href="#取消已经暂存的文件" class="headerlink" title="取消已经暂存的文件"></a>取消已经暂存的文件</h3><p>接下来的两个小节将演示如何取消暂存区域中的文件，以及如何取消工作目录中已修改的文件。不用担心，查看文件状态的时候就提示了该如何撤消，所以不需要死记硬背。来看下面的例子，有两个修改过的文件，我们想要分开提交，但不小心用 <code>git add .</code>全加到了暂存区域。该如何撤消暂存其中的一个文件呢？其实，<code>git status</code>的命令输出已经告诉了我们该怎么做：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   README.txt</span><br><span class="line">        modified:   benchmarks.rb</span><br></pre></td></tr></table></figure></p>
+<p>就在 “Changes to be committed” 下面，括号中有提示，可以使用<code>git reset HEAD &lt;file&gt;...</code> 的方式取消暂存。好吧，我们来试试取消暂存 benchmarks.rb 文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD benchmarks.rb</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M       benchmarks.rb</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   README.txt</span><br><span class="line"></span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">        modified:   benchmarks.rb</span><br></pre></td></tr></table></figure></p>
+<p>这条命令看起来有些古怪，先别管，能用就行。现在 benchmarks.rb 文件又回到了之前已修改未暂存的状态。</p>
+<h3 id="取消对文件的修改"><a href="#取消对文件的修改" class="headerlink" title="取消对文件的修改"></a>取消对文件的修改</h3><p>如果觉得刚才对 benchmarks.rb 的修改完全没有必要，该如何取消修改，回到之前的状态（也就是修改之前的版本）呢？ <code>git status</code>同样提示了具体的撤消方法，接着上面的例子，现在未暂存区域看起来像这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">        modified:   benchmarks.rb</span><br></pre></td></tr></table></figure></p>
+<p>在第二个括号中，我们看到了抛弃文件修改的命令（至少在 Git 1.6.1 以及更高版本中会这样提示，如果你还在用老版本，我们强烈建议你升级，以获取最佳的用户体验），让我们试试看：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- benchmarks.rb</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   README.txt</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，该文件已经恢复到修改前的版本。你可能已经意识到了，这条命令有些危险，所有对文件的修改都没有了，因为我们刚刚把之前版本的文件复制过来重写了此文件。所以在用这条命令前，请务必确定真的不再需要保留刚才的修改。如果只是想回退版本，同时保留刚才的修改以便将来继续工作，可以用下章介绍的 stashing 和分支来处理，应该会更好些。</p>
+<p>记住，任何已经提交到 Git 的都可以被恢复。即便在已经删除的分支中的提交，或者用 <code>--amend</code>重新改写的提交，都可以被恢复（关于数据恢复的内容见第九章）。所以，你可能失去的数据，仅限于没有提交过的，对 Git 来说它们就像从未存在过一样。</p>
+<h2 id="修正最后一次提交"><a href="#修正最后一次提交" class="headerlink" title="修正最后一次提交"></a>修正最后一次提交</h2><p>有时候我们提交完了才发现漏掉了几个文件没有加，或者提交信息写错了。想要撤消刚才的提交操作，可以使用<code>--amend</code>选项重新提交：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure></p>
+<p>此命令将使用当前的暂存区域快照提交。如果刚才提交完没有作任何改动，直接运行此命令的话，相当于有机会重新编辑提交说明，但将要提交的文件快照和之前的一样。</p>
+<p>启动文本编辑器后，会看到上次提交时的说明，编辑它确认没问题后保存退出，就会使用新的提交说明覆盖刚才失误的提交。</p>
+<p>如果刚才提交时忘了暂存某些修改，可以先补上暂存操作，然后再运行<code>--amend</code>提交：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m <span class="string">'initial commit'</span></span><br><span class="line">$ git add forgotten_file</span><br><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure></p>
+<p>上面的三条命令最终只是产生一个提交，第二个提交命令修正了第一个的提交内容。</p>
 
       
     </div>
@@ -441,13 +336,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/02/27/Git常规使用方法/">Git常规使用方法</a></p>
+        <p><span>本文标题:</span><a href="/2019/03/01/Git-reset-笔记/">Git reset 笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 laijinxian 的个人博客">laijinxian</a></p>
-        <p><span>发布时间:</span>2019年02月27日 - 14时40分</p>
+        <p><span>发布时间:</span>2019年03月01日 - 11时06分</p>
         <p><span>最后更新:</span>2019年03月04日 - 12时20分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/02/27/Git常规使用方法/" title="Git常规使用方法">http://yoursite.com/2019/02/27/Git常规使用方法/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/02/27/Git常规使用方法/　　作者: laijinxian" title></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/01/Git-reset-笔记/" title="Git reset 笔记">http://yoursite.com/2019/03/01/Git-reset-笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/01/Git-reset-笔记/　　作者: laijinxian" title></span>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -458,18 +353,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/02/28/Git-GitLab-使用及规范/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/03/04/Web-应用常见安全漏洞详解/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Git &amp;&amp; GitLab 使用及规范
+          web 应用常见安全漏洞一览
         
       </div>
     </a>
   
   
-    <a href="/2019/02/25/First Day/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">First day</div>
+    <a href="/2019/02/28/Git-GitLab-使用及规范/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git &amp;&amp; GitLab 使用及规范</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -481,8 +376,8 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#角色权限"><span class="toc-number">1.</span> <span class="toc-text">角色权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支定义"><span class="toc-number">2.</span> <span class="toc-text">分支定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般使用方法"><span class="toc-number">3.</span> <span class="toc-text">一般使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-克隆"><span class="toc-number">3.1.</span> <span class="toc-text">1. 克隆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-查看所有分支"><span class="toc-number">3.2.</span> <span class="toc-text">2. 查看所有分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-切换到dev分支"><span class="toc-number">3.3.</span> <span class="toc-text">3. 切换到dev分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-基于dev分支创建自己的分支-lt-分支名称-gt"><span class="toc-number">3.4.</span> <span class="toc-text">4. 基于dev分支创建自己的分支&lt;分支名称&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-切换到-lt-分支名称-gt-，然后愉快的coding"><span class="toc-number">3.5.</span> <span class="toc-text">5. 切换到&lt;分支名称&gt;，然后愉快的coding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-加到暂存区"><span class="toc-number">3.6.</span> <span class="toc-text">6. 加到暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-可随时检查工作区状态"><span class="toc-number">3.7.</span> <span class="toc-text">7. 可随时检查工作区状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-提交到本地仓库"><span class="toc-number">3.8.</span> <span class="toc-text">8. 提交到本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-推送到服务器仓库"><span class="toc-number">3.9.</span> <span class="toc-text">9. 推送到服务器仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-合并到dev分支（例）"><span class="toc-number">3.10.</span> <span class="toc-text">10. 合并到dev分支（例）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A-Developer在网页上请求合并（推荐）"><span class="toc-number">3.10.1.</span> <span class="toc-text">A. Developer在网页上请求合并（推荐）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Master角色直接本地合并"><span class="toc-number">3.10.2.</span> <span class="toc-text">B. Master角色直接本地合并</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-删除分支，切换到master分支然后删除-lt-分支名称-gt-分支（不能删除当前分支）"><span class="toc-number">3.11.</span> <span class="toc-text">11. 删除分支，切换到master分支然后删除&lt;分支名称&gt;分支（不能删除当前分支）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-删除远程，危险，切记只删除自己建立的分支，不要删除公共分支，例如dev、release等"><span class="toc-number">3.12.</span> <span class="toc-text">12. 删除远程，危险，切记只删除自己建立的分支，不要删除公共分支，例如dev、release等</span></a></li></ol></li></ol>
-</div>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#git区域"><span class="toc-number">1.</span> <span class="toc-text">git区域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三个主要参数"><span class="toc-number">2.</span> <span class="toc-text">三个主要参数</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#提交级别的撤销"><span class="toc-number"></span> <span class="toc-text">提交级别的撤销</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件级别的撤销"><span class="toc-number"></span> <span class="toc-text">文件级别的撤销</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消已经暂存的文件"><span class="toc-number">1.</span> <span class="toc-text">取消已经暂存的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">2.</span> <span class="toc-text">取消对文件的修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修正最后一次提交"><span class="toc-number"></span> <span class="toc-text">修正最后一次提交</span></a>
+</li></div>
 <style>
     .left-col .switch-btn {
         display: none;
@@ -554,13 +449,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/02/28/Git-GitLab-使用及规范/" title="上一篇: Git &amp;&amp; GitLab 使用及规范">
+            <a href="/2019/03/04/Web-应用常见安全漏洞详解/" title="上一篇: web 应用常见安全漏洞一览">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/02/25/First Day/" title="下一篇: First day">
+            <a href="/2019/02/28/Git-GitLab-使用及规范/" title="下一篇: Git &amp;&amp; GitLab 使用及规范">
                 <i class="fa fa-angle-right"></i>
             </a>
         

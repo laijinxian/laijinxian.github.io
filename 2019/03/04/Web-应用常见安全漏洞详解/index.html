@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl">
+  
+  
+  
+  
+  <title>web 应用常见安全漏洞一览 | 正在奔跑的前端小白</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="web 应用常见安全漏洞一览： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
+<meta name="keywords" content="web安全问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web 应用常见安全漏洞一览">
+<meta property="og:url" content="http://yoursite.com/2019/03/04/Web-应用常见安全漏洞详解/index.html">
+<meta property="og:site_name" content="正在奔跑的前端小白">
+<meta property="og:description" content="web 应用常见安全漏洞一览： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-04T09:44:00.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web 应用常见安全漏洞一览">
+<meta name="twitter:description" content="web 应用常见安全漏洞一览： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
+  
+    <link rel="alternative" href="/atom.xml" title="正在奔跑的前端小白" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/BigGitHub.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/laijinxian.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">laijinxian</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">赖金贤</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/laijinxian" title="github">github</a>
+                            
+                                <a class="fl rss" target="_blank" href="https://www.cnblogs.com/ljx20180807/" title="rss">rss</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/5658398179/profile?topnav=1&wvr=6&is_all=1" title="weibo">weibo</a>
+                            
+                                <a class="fl wechat" target="_blank" href="/archives/" title="wechat">wechat</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Git-GitLab-GitHub/" style="font-size: 20px;">Git/GitLab/GitHub</a> <a href="/tags/web安全问题/" style="font-size: 10px;">web安全问题</a> <a href="/tags/日常/" style="font-size: 10px;">日常</a>
+                    </div>
+                </section>
+                
+                
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">laijinxian</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/laijinxian.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">laijinxian</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">赖金贤</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/laijinxian" title="github">github</a>
+                    
+                        <a class="rss" target="_blank" href="https://www.cnblogs.com/ljx20180807/" title="rss">rss</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/5658398179/profile?topnav=1&wvr=6&is_all=1" title="weibo">weibo</a>
+                    
+                        <a class="wechat" target="_blank" href="/archives/" title="wechat">wechat</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Web-应用常见安全漏洞详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/04/Web-应用常见安全漏洞详解/" class="article-date">
+      <time datetime="2019-03-04T03:06:08.000Z" itemprop="datePublished">2019-03-04</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      web 应用常见安全漏洞一览
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/web/">web</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web安全问题/">web安全问题</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong> web 应用常见安全漏洞一览：</strong> <excerpt in index | 首页摘要><br>使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit<br><a id="more"></a></excerpt></p>
+<p><the rest of contents | 余下全文></the></p>
+<h2 id="1、SQL-注入"><a href="#1、SQL-注入" class="headerlink" title="1、SQL 注入"></a>1、SQL 注入</h2><p>SQL 注入就是通过给 web 应用接口传入一些特殊字符，达到欺骗服务器执行恶意的 SQL 命令。<br>SQL 注入漏洞属于后端的范畴，但前端也可做体验上的优化。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>当使用外部不可信任的数据作为参数进行数据库的增、删、改、查时，如果未对外部数据进行过滤，就会产生 SQL 注入漏洞。<br>比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">"外部输入名称"</span></span><br><span class="line">sql = <span class="string">"select * from users where name="</span>+ name;</span><br></pre></td></tr></table></figure></p>
+<p>上面的 SQL 语句目的是通过用户输入的用户名查找用户信息，因为由于 SQL 语句是直接拼接的，也没有进行过滤，所以，当用户输入<code>&#39;&#39;or&#39;1&#39;=&#39;1&#39;</code>时，这个语句的功能就是搜索users全表的记录。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select* from users <span class="built_in">where</span> name=<span class="string">''</span>or<span class="string">'1'</span>=<span class="string">'1'</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>具体的解决方案很多，但大部分都是基于一点：不信任任何外部输入。<br>所以，对任何外部输入都进行过滤，然后再进行数据库的增、删、改、查。<br>此外，适当的权限控制、不曝露必要的安全信息和日志也有助于预防 SQL 注入漏洞。<br>参考《Web 安全漏洞之 SQL 注入 - 防御方法》(<a href="https://juejin.im/post/5bd5b820e51d456f72531fa8#heading-2" target="_blank" rel="noopener">https://juejin.im/post/5bd5b820e51d456f72531fa8#heading-2</a>) 了解具体的解决方案。</p>
+<h3 id="推荐参考"><a href="#推荐参考" class="headerlink" title="推荐参考"></a>推荐参考</h3><p>《Web 安全漏洞之 SQL 注入》：<a href="https://juejin.im/post/5bd5b820e51d456f72531fa8" target="_blank" rel="noopener">https://juejin.im/post/5bd5b820e51d456f72531fa8</a><br>《SQL 注入详解》：<a href="https://segmentfault.com/a/1190000007520556" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007520556</a></p>
+<hr>
+<h2 id="2、XSS-攻击"><a href="#2、XSS-攻击" class="headerlink" title="2、XSS 攻击"></a>2、XSS 攻击</h2><blockquote>
+<p>XSS 攻击全称跨站脚本攻击<code>（Cross-Site Scripting）</code>，简单的说就是攻击者通过在目标网站上注入恶意脚本并运行，获取用户的敏感信息如 <code>Cookie、SessionID</code> 等，简单来说就是攻击者通过某种方式向浏览器页面注入了恶意代码，并且浏览器执行了这些代码；影响网站与用户数据安全。这类攻击通常包含了HTML以及用户端脚本语言XSS 攻击更偏向前端的范畴，但后端在保存数据的时候也需要对数据进行安全过滤。</p>
+</blockquote>
+<ol>
+<li>存储型</li>
+<li>反射型</li>
+<li>DOM型</li>
+</ol>
+<h3 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h3><ul>
+<li><code>1.</code>存储型的XSS一般是指恶意代码注入后保存在后端数据库内，浏览器渲染时如果没有进行过滤和转义，则会执行其中的恶意代码，例如某个网站的用户个性签名，如果某个用户在个性签名内填入，<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果后端或者前端没有对此数据进行过滤转义处理，则会出现每个人访问该用户主页都会弹出他们浏览器的cookie，如果把这段代码换成将cookie值发送到攻击者的第三方服务器上，攻击者就可以轻易获得用户的敏感信息。</p>
+<ul>
+<li><code>2.</code>反射型的XSS一般是指服务端返回恶意脚本，在客户端触发执行的攻击<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.com/index.php?s=&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>服务器上并没有这样的内容，攻击者构造恶意URL，欺骗用户点击，触发XSS攻击。</p>
+<ul>
+<li><code>3.</code>DOM型的XSS一般是指代码部分本身有漏洞存在，例如在开发者在JS部分使用了location来调用URL上的数据处理部分逻辑，引发了反射型的URL恶意构造的隐患。</li>
+</ul>
+<h3 id="比如："><a href="#比如：" class="headerlink" title="比如："></a>比如：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在一个文章应用中（如微信文章），攻击者在文章编辑后台通过注入script标签及js代码，后端未加过滤就保存到数据库，</span><br><span class="line">前端渲染文章详情的时候也未加过滤，这就会让这段js代码执行，引起 XSS 攻击。</span><br></pre></td></tr></table></figure>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>XSS 主要是指恶意注入代码，所以不要相信任何用户的输入，确保用户输入的安全性，对输入输出数据进行转义编码过滤。<br>一个基本的思路是渲染前端页面（不管是客户端渲染还是服务器端渲染）或者动态插入 HTML 片段时，任何数据都不可信任，都要先做 HTML 过滤，然后再渲染。<br>参考《前端安全系列（一）：如何防止XSS攻击？ - 攻击的预防》(<a href="https://segmentfault.com/a/1190000016551188#articleHeader7" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016551188#articleHeader7</a>) 了解具体的解决方案。</p>
+<h3 id="其他安全措施"><a href="#其他安全措施" class="headerlink" title="其他安全措施"></a>其他安全措施</h3><ol>
+<li>页面使用Https</li>
+<li>如果不能保证参数的可控性，慎用eval();</li>
+<li>部分cookie可以设置httpOnly</li>
+<li>Html5 iframe标签的安全新特性，sandbox属性</li>
+</ol>
+<h3 id="推荐参考-1"><a href="#推荐参考-1" class="headerlink" title="推荐参考"></a>推荐参考</h3><p>《前端安全系列（一）：如何防止XSS攻击？》：<a href="https://segmentfault.com/a/1190000016551188" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016551188</a><br>《前端防御 XSS》：<a href="https://juejin.im/entry/56da82a87664bf0052ebad41" target="_blank" rel="noopener">https://juejin.im/entry/56da82a87664bf0052ebad41</a><br>《浅说 XSS 和 CSRF》：<a href="https://juejin.im/entry/5b4b56fd5188251b1a7b2ac1" target="_blank" rel="noopener">https://juejin.im/entry/5b4b56fd5188251b1a7b2ac1</a></p>
+<hr>
+<h2 id="3、CSRF-攻击"><a href="#3、CSRF-攻击" class="headerlink" title="3、CSRF 攻击"></a>3、CSRF 攻击</h2><blockquote>
+<p>跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。跟跨網站指令碼（XSS）相比，XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。</p>
+</blockquote>
+<h3 id="攻击原理-一个典型的-CSRF-攻击有着如下的流程："><a href="#攻击原理-一个典型的-CSRF-攻击有着如下的流程：" class="headerlink" title="攻击原理 一个典型的 CSRF 攻击有着如下的流程："></a>攻击原理 一个典型的 CSRF 攻击有着如下的流程：</h3><blockquote>
+<p>1.用户A登陆某一网站（例如豆瓣），登陆成功后该用户浏览器客户端存留Cookie记录.<br>2.该网站有条删除用户日记的接口地址：<a href="http://www.douban.com/del/article/1" target="_blank" rel="noopener">http://www.douban.com/del/article/1</a><br>3.攻击者利用各种手段（微信发短网址链接等等）引诱用户A进入恶意网址。 恶意网址的Html内容如下：。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=<span class="string">"http:www.douban.com/del/article/1"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>用户A在毫不知情的情况下请求了http:<a href="http://www.douban.com/del/article/1这个接口，由于他不久前登陆过豆瓣，客户端存留登陆成功的Cookie，就这样莫名的删除了自己的一篇日记，CSRF利用的就是这点，浏览器只能识别是否是该用户访问，却不能识别是否是该用户" target="_blank" rel="noopener">www.douban.com/del/article/1这个接口，由于他不久前登陆过豆瓣，客户端存留登陆成功的Cookie，就这样莫名的删除了自己的一篇日记，CSRF利用的就是这点，浏览器只能识别是否是该用户访问，却不能识别是否是该用户</a> 本人意愿访问。</p>
+<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li><code>1.</code><strong>后端处理 (REFERER) （基本的思路是能正确识别是否是用户发起的请求）</strong><br>客户端向服务器发送请求时，Http请求头内存在一个Referer属性，属性值就是发起该次请求的域名。<br>后端在代码里关键操作部分进行判断，如果Referer的值等于已知的域名（自家域名）则放行继续操作，否则打回。<br>这种办法有局限性，因为不同浏览器对Referer这个实现可能会有差异，也不排除有攻击者直接攻击浏览器篡改Referer的可能。</li>
+</ul>
+<ul>
+<li><code>2.</code><strong>前后端配合处理（Token）</strong><br>后端在用户登陆成功时分配给该用户一个随机生成的Token值，存在session内，同时把这个Token值返回给前端，前端可以把这个值存到cookie内或者其他本地存储，<br>每次向服务器发起请求时把Token值作为参数一起传给后端，后端判断传过来的token是否和session中的token一致，一致则放行，否则打回。<br>由于CSRF攻击者只能伪造用户的Cookie来骗过浏览器，但是他并不能得到Cookie中的具体值（例如Token值），<br>所以这样的恶意请求会被后端打回，有效的防止了CSRF攻击。</li>
+</ul>
+<h3 id="推荐参考-2"><a href="#推荐参考-2" class="headerlink" title="推荐参考"></a>推荐参考</h3><p>《前端安全系列之二：如何防止CSRF攻击？》：<a href="https://segmentfault.com/a/1190000016659945" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016659945</a><br>《Web安全漏洞之CSRF》：<a href="https://juejin.im/post/5ba1a800e51d450e8657f5dd" target="_blank" rel="noopener">https://juejin.im/post/5ba1a800e51d450e8657f5dd</a><br>《浅说 XSS 和 CSRF》：<a href="https://juejin.im/entry/5b4b56fd5188251b1a7b2ac1" target="_blank" rel="noopener">https://juejin.im/entry/5b4b56fd5188251b1a7b2ac1</a></p>
+<hr>
+<h2 id="4、DDoS-攻击"><a href="#4、DDoS-攻击" class="headerlink" title="4、DDoS 攻击"></a>4、DDoS 攻击</h2><blockquote>
+<p>DoS 攻击全称拒绝服务<code>（Denial of Service）</code>，简单的说就是让一个公开网站无法访问，而 DDoS 攻击（分布式拒绝服务 <code>Distributed Denial of Service）</code>是 DoS 的升级版。<br>这个就完全属于后端的范畴了。</p>
+</blockquote>
+<h3 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h3><p>攻击者不断地提出服务请求，让合法用户的请求无法及时处理，这就是 DoS 攻击。<br>攻击者使用多台计算机或者计算机集群进行 DoS 攻击，就是 DDoS 攻击。</p>
+<h3 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h3><p>防止 DDoS 攻击的基本思路是限流，限制单个用户的流量（包括 IP 等）。<br>参考《DDoS的攻击及防御 - 防御》(<a href="https://segmentfault.com/a/1190000016584829#articleHeader19" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016584829#articleHeader19</a>) 了解具体的解决方案。</p>
+<h3 id="推荐参考-3"><a href="#推荐参考-3" class="headerlink" title="推荐参考"></a>推荐参考</h3><p>《DDoS的攻击及防御》：<a href="https://segmentfault.com/a/1190000016584829" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016584829</a><br>《浅谈 DDoS 攻击与防御》：<a href="https://juejin.im/entry/5b7a21256fb9a01a031aef67" target="_blank" rel="noopener">https://juejin.im/entry/5b7a21256fb9a01a031aef67</a><br>《使用 Nginx、Nginx Plus 抵御 DDOS 攻击》：<a href="https://juejin.im/entry/56d824591ea493005db9d284" target="_blank" rel="noopener">https://juejin.im/entry/56d824591ea493005db9d284</a></p>
+<hr>
+<h2 id="5-XXE-漏洞"><a href="#5-XXE-漏洞" class="headerlink" title="5. XXE 漏洞"></a>5. XXE 漏洞</h2><blockquote>
+<p>XXE 漏洞全称 XML 外部实体漏洞（XML External Entity），当应用程序解析 XML 输入时，如果没有禁止外部实体的加载，导致可加载恶意外部文件和代码，就会造成任意文件读取、命令执行、内网端口扫描、攻击内网网站等攻击。</p>
+</blockquote>
+<p>这个只在能够接收 XML 格式参数的接口才会出现。</p>
+<h3 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h3><p>1、禁用外部实体<br>2、过滤用户提交的XML数据<br>参考《xxe漏洞的学习与利用总结》(<a href="https://www.cnblogs.com/r00tuser/p/7255939.html" target="_blank" rel="noopener">https://www.cnblogs.com/r00tuser/p/7255939.html</a>) 了解具体的解决方案。</p>
+<h3 id="推荐参考-4"><a href="#推荐参考-4" class="headerlink" title="推荐参考"></a>推荐参考</h3><p>《好刚：6分钟视频看懂XXE漏洞攻击》：<a href="https://juejin.im/entry/5b719fdc6fb9a009a0607aaa" target="_blank" rel="noopener">https://juejin.im/entry/5b719fdc6fb9a009a0607aaa</a><br>《xxe漏洞的学习与利用总结》：<a href="https://www.cnblogs.com/r00tuser/p/7255939.html" target="_blank" rel="noopener">https://www.cnblogs.com/r00tuser/p/7255939.html</a><br>《XXE漏洞攻防学习（上）》：<a href="https://www.cnblogs.com/ESHLkangi/p/9245404.html" target="_blank" rel="noopener">https://www.cnblogs.com/ESHLkangi/p/9245404.html</a></p>
+<hr>
+<h2 id="6、JSON-劫持"><a href="#6、JSON-劫持" class="headerlink" title="6、JSON 劫持"></a>6、JSON 劫持</h2><blockquote>
+<p>JSON 劫持（JSON Hijacking）是用于获取敏感数据的一种攻击方式，属于 CSRF 攻击的范畴。</p>
+</blockquote>
+<h3 id="原因-2"><a href="#原因-2" class="headerlink" title="原因"></a>原因</h3><p>一些 Web 应用会把一些敏感数据以 json 的形式返回到前端，如果仅仅通过 Cookie 来判断请求是否合法，那么就可以利用类似 CSRF 的手段，向目标服务器发送请求，以获得敏感数据。<br>比如下面的链接在已登录的情况下会返回 json 格式的用户信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.test.com/userinfo</span><br></pre></td></tr></table></figure></p>
+<p>攻击者可以在自己的虚假页面中，加入如下标签：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src = <span class="string">"http://www.test.com/userinfo"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果当前浏览器已经登录了<a href="http://www.test.com，并且" target="_blank" rel="noopener">www.test.com，并且</a> Cookie 未过期，然后访问了攻击者的虚假页面，那么该页面就可以拿到 json 形式的用户敏感信息，因为script标签会自动解析 json 数据，生成对应的 js 对象。然后再通过：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.__defineSetter__</span><br></pre></td></tr></table></figure></p>
+<p>这个函数来触发自己的恶意代码。<br>但是这个函数在当前的新版本 Chrome 和 Firefox 中都已经失效了。<br>注：上面的过程摘自《JSON和JSONP劫持以及解决方法》(<a href="https://blog.csdn.net/yjclsx/article/details/80353754" target="_blank" rel="noopener">https://blog.csdn.net/yjclsx/article/details/80353754</a>)</p>
+<h3 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h3><p>1、X-Requested-With 标识<br>2、浏览器 JSON 数据识别<br>3、禁止 Javascript 执行 JSON 数据</p>
+<h3 id="推荐参考-5"><a href="#推荐参考-5" class="headerlink" title="推荐参考"></a>推荐参考</h3><p>《JSON和JSONP劫持以及解决方法》：<a href="https://blog.csdn.net/yjclsx/article/details/80353754" target="_blank" rel="noopener">https://blog.csdn.net/yjclsx/article/details/80353754</a><br>《JSONP 安全攻防技术：JSON劫持、 XSS漏洞》：<a href="https://www.cnblogs.com/52php/p/5677775.html" target="_blank" rel="noopener">https://www.cnblogs.com/52php/p/5677775.html</a></p>
+<hr>
+<h2 id="7、暴力破解"><a href="#7、暴力破解" class="headerlink" title="7、暴力破解"></a>7、暴力破解</h2><blockquote>
+<p>这个一般针对密码而言，弱密码（Weak Password）很容易被别人（对你很了解的人等）猜到或被破解工具暴力破解。</p>
+</blockquote>
+<h3 id="解决方案-6"><a href="#解决方案-6" class="headerlink" title="解决方案"></a>解决方案</h3><p>1、密码复杂度要足够大，也要足够隐蔽<br>2、限制尝试次数</p>
+<hr>
+<h2 id="8、HTTP-报头追踪漏洞"><a href="#8、HTTP-报头追踪漏洞" class="headerlink" title="8、HTTP 报头追踪漏洞"></a>8、HTTP 报头追踪漏洞</h2><blockquote>
+<p>HTTP/1.1（RFC2616）规范定义了 HTTP TRACE 方法，主要是用于客户端通过向 Web 服务器提交 TRACE 请求来进行测试或获得诊断信息。<br>当 Web 服务器启用 TRACE 时，提交的请求头会在服务器响应的内容（Body）中完整的返回，其中 HTTP 头很可能包括 Session Token、Cookies 或其它认证信息。攻击者可以利用此漏洞来欺骗合法用户并得到他们的私人信息。</p>
+</blockquote>
+<h3 id="解决方案-7"><a href="#解决方案-7" class="headerlink" title="解决方案"></a>解决方案</h3><p>禁用 HTTP TRACE 方法。</p>
+<hr>
+<h2 id="9、信息泄露"><a href="#9、信息泄露" class="headerlink" title="9、信息泄露"></a>9、信息泄露</h2><blockquote>
+<p>由于 Web 服务器或应用程序没有正确处理一些特殊请求，泄露 Web 服务器的一些敏感信息，如用户名、密码、源代码、服务器信息、配置信息等。</p>
+</blockquote>
+<h3 id="需注意："><a href="#需注意：" class="headerlink" title="需注意："></a>需注意：</h3><ol>
+<li>应用程序报错时，不对外产生调试信息</li>
+<li>过滤用户提交的数据与特殊字符</li>
+<li>保证源代码、服务器配置的安全</li>
+</ol>
+<hr>
+<h2 id="10、目录遍历漏洞"><a href="#10、目录遍历漏洞" class="headerlink" title="10、目录遍历漏洞"></a>10、目录遍历漏洞</h2><blockquote>
+<p>攻击者向 Web 服务器发送请求，通过在 URL 中或在有特殊意义的目录中附加../、或者附加../的一些变形（如..或..//甚至其编码），导致攻击者能够访问未授权的目录，以及在 Web 服务器的根目录以外执行命令。</p>
+</blockquote>
+<hr>
+<h2 id="11、命令执行漏洞"><a href="#11、命令执行漏洞" class="headerlink" title="11、命令执行漏洞"></a>11、命令执行漏洞</h2><blockquote>
+<p>命令执行漏洞是通过 URL 发起请求，在 Web 服务器端执行未授权的命令，获取系统信息、篡改系统配置、控制整个系统、使系统瘫痪等。</p>
+</blockquote>
+<hr>
+<h2 id="12、文件上传漏洞"><a href="#12、文件上传漏洞" class="headerlink" title="12、文件上传漏洞"></a>12、文件上传漏洞</h2><blockquote>
+<p>如果对文件上传路径变量过滤不严，并且对用户上传的文件后缀以及文件类型限制不严，攻击者可通过 Web 访问的目录上传任意文件，包括网站后门文件（webshell），进而远程控制网站服务器。</p>
+</blockquote>
+<h3 id="需注意：-1"><a href="#需注意：-1" class="headerlink" title="需注意："></a>需注意：</h3><blockquote>
+<p>在开发网站及应用程序过程中，需严格限制和校验上传的文件，禁止上传恶意代码的文件<br>限制相关目录的执行权限，防范 webshell 攻击</p>
+</blockquote>
+<hr>
+<h2 id="13、其他漏洞"><a href="#13、其他漏洞" class="headerlink" title="13、其他漏洞"></a>13、其他漏洞</h2><p>1、SSLStrip 攻击<br>2、OpenSSL Heartbleed 安全漏洞<br>3、CCS 注入漏洞<br>4、证书有效性验证漏洞</p>
+<hr>
+<h2 id="14、业务漏洞"><a href="#14、业务漏洞" class="headerlink" title="14、业务漏洞"></a>14、业务漏洞</h2><blockquote>
+<p>一般业务漏洞是跟具体的应用程序相关，比如参数篡改（连续编号 ID / 订单、1 元支付）、重放攻击（伪装支付）、权限控制（越权操作）等。</p>
+</blockquote>
+<p>另外可以参考：6种常见web漏洞坑(<a href="https://blog.csdn.net/xueshao110/article/details/78912988)。" target="_blank" rel="noopener">https://blog.csdn.net/xueshao110/article/details/78912988)。</a></p>
+<hr>
+<h2 id="15、框架或应用漏洞"><a href="#15、框架或应用漏洞" class="headerlink" title="15、框架或应用漏洞"></a>15、框架或应用漏洞</h2><ol>
+<li>WordPress 4.7 / 4.7.1：REST API 内容注入漏洞</li>
+<li>Drupal Module RESTWS 7.x：Remote PHP Code Execution</li>
+<li>SugarCRM 6.5.23：REST PHP Object Injection Exploit</li>
+<li>Apache Struts：REST Plugin With Dynamic Method Invocation Remote Code Execution</li>
+<li>Oracle GlassFish Server：REST CSRF</li>
+<li>QQ Browser 9.6：API 权限控制问题导致泄露隐私模式</li>
+<li>Hacking Docker：Registry API 未授权访问</li>
+</ol>
+<hr>
+<p>参考链接 </p>
+<ol>
+<li><a href="https://segmentfault.com/a/1190000018004657" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018004657</a></li>
+<li><a href="https://blog.shijukun.com/2018/09/25/soft/" target="_blank" rel="noopener">https://blog.shijukun.com/2018/09/25/soft/</a></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞一览</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 laijinxian 的个人博客">laijinxian</a></p>
+        <p><span>发布时间:</span>2019年03月04日 - 11时06分</p>
+        <p><span>最后更新:</span>2019年03月04日 - 17时44分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/04/Web-应用常见安全漏洞详解/" title="web 应用常见安全漏洞一览">http://yoursite.com/2019/03/04/Web-应用常见安全漏洞详解/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/04/Web-应用常见安全漏洞详解/　　作者: laijinxian" title></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/01/Git-reset-笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git reset 笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、SQL-注入"><span class="toc-number">1.</span> <span class="toc-text">1、SQL 注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原因"><span class="toc-number">1.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">1.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐参考"><span class="toc-number">1.3.</span> <span class="toc-text">推荐参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、XSS-攻击"><span class="toc-number">2.</span> <span class="toc-text">2、XSS 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#攻击原理"><span class="toc-number">2.1.</span> <span class="toc-text">攻击原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比如："><span class="toc-number">2.2.</span> <span class="toc-text">比如：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-1"><span class="toc-number">2.3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他安全措施"><span class="toc-number">2.4.</span> <span class="toc-text">其他安全措施</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐参考-1"><span class="toc-number">2.5.</span> <span class="toc-text">推荐参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、CSRF-攻击"><span class="toc-number">3.</span> <span class="toc-text">3、CSRF 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#攻击原理-一个典型的-CSRF-攻击有着如下的流程："><span class="toc-number">3.1.</span> <span class="toc-text">攻击原理 一个典型的 CSRF 攻击有着如下的流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-2"><span class="toc-number">3.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐参考-2"><span class="toc-number">3.3.</span> <span class="toc-text">推荐参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、DDoS-攻击"><span class="toc-number">4.</span> <span class="toc-text">4、DDoS 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原因-1"><span class="toc-number">4.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-3"><span class="toc-number">4.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐参考-3"><span class="toc-number">4.3.</span> <span class="toc-text">推荐参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-XXE-漏洞"><span class="toc-number">5.</span> <span class="toc-text">5. XXE 漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-4"><span class="toc-number">5.1.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐参考-4"><span class="toc-number">5.2.</span> <span class="toc-text">推荐参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、JSON-劫持"><span class="toc-number">6.</span> <span class="toc-text">6、JSON 劫持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原因-2"><span class="toc-number">6.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-5"><span class="toc-number">6.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐参考-5"><span class="toc-number">6.3.</span> <span class="toc-text">推荐参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、暴力破解"><span class="toc-number">7.</span> <span class="toc-text">7、暴力破解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-6"><span class="toc-number">7.1.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、HTTP-报头追踪漏洞"><span class="toc-number">8.</span> <span class="toc-text">8、HTTP 报头追踪漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-7"><span class="toc-number">8.1.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、信息泄露"><span class="toc-number">9.</span> <span class="toc-text">9、信息泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需注意："><span class="toc-number">9.1.</span> <span class="toc-text">需注意：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10、目录遍历漏洞"><span class="toc-number">10.</span> <span class="toc-text">10、目录遍历漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11、命令执行漏洞"><span class="toc-number">11.</span> <span class="toc-text">11、命令执行漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12、文件上传漏洞"><span class="toc-number">12.</span> <span class="toc-text">12、文件上传漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需注意：-1"><span class="toc-number">12.1.</span> <span class="toc-text">需注意：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13、其他漏洞"><span class="toc-number">13.</span> <span class="toc-text">13、其他漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14、业务漏洞"><span class="toc-number">14.</span> <span class="toc-text">14、业务漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15、框架或应用漏洞"><span class="toc-number">15.</span> <span class="toc-text">15、框架或应用漏洞</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/03/01/Git-reset-笔记/" title="下一篇: Git reset 笔记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/Git-reset-笔记/">Git reset 笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/Git-GitLab-使用及规范/">Git && GitLab 使用及规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/Git常规使用方法/">Git常规使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/25/First Day/">First day</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 laijinxian
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

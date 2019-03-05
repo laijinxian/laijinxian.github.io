@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl">
+  
+  
+  
+  
+  <title>Markdown和Haroopad介绍文档 | 正在奔跑的前端小白</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Markdown和Haroopad介绍文档： Markdown和Haroopad介绍文档">
+<meta name="keywords" content="Markdown&#x2F;Haroopad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown和Haroopad介绍文档">
+<meta property="og:url" content="http://yoursite.com/2019/03/05/Markdown和Haroopad介绍文档/index.html">
+<meta property="og:site_name" content="正在奔跑的前端小白">
+<meta property="og:description" content="Markdown和Haroopad介绍文档： Markdown和Haroopad介绍文档">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.sina.com/favicon.ico">
+<meta property="og:updated_time" content="2019-03-05T11:17:01.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown和Haroopad介绍文档">
+<meta name="twitter:description" content="Markdown和Haroopad介绍文档： Markdown和Haroopad介绍文档">
+<meta name="twitter:image" content="http://www.sina.com/favicon.ico">
+  
+    <link rel="alternative" href="/atom.xml" title="正在奔跑的前端小白" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/BigGitHub.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/laijinxian.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">laijinxian</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">赖金贤</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/laijinxian" title="github">github</a>
+                            
+                                <a class="fl rss" target="_blank" href="https://www.cnblogs.com/ljx20180807/" title="rss">rss</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/5658398179/profile?topnav=1&wvr=6&is_all=1" title="weibo">weibo</a>
+                            
+                                <a class="fl wechat" target="_blank" href="/archives/" title="wechat">wechat</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Git-GitLab-GitHub/" style="font-size: 20px;">Git/GitLab/GitHub</a> <a href="/tags/Jenkins-shell/" style="font-size: 10px;">Jenkins/shell</a> <a href="/tags/Markdown-Haroopad/" style="font-size: 10px;">Markdown/Haroopad</a> <a href="/tags/web安全问题/" style="font-size: 10px;">web安全问题</a> <a href="/tags/日常/" style="font-size: 10px;">日常</a>
+                    </div>
+                </section>
+                
+                
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">laijinxian</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/laijinxian.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">laijinxian</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">赖金贤</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/laijinxian" title="github">github</a>
+                    
+                        <a class="rss" target="_blank" href="https://www.cnblogs.com/ljx20180807/" title="rss">rss</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/5658398179/profile?topnav=1&wvr=6&is_all=1" title="weibo">weibo</a>
+                    
+                        <a class="wechat" target="_blank" href="/archives/" title="wechat">wechat</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Markdown和Haroopad介绍文档" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/05/Markdown和Haroopad介绍文档/" class="article-date">
+      <time datetime="2019-03-05T10:39:55.000Z" itemprop="datePublished">2019-03-05</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Markdown和Haroopad介绍文档
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/介绍文档/">介绍文档</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown-Haroopad/">Markdown/Haroopad</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong> Markdown和Haroopad介绍文档：</strong> <excerpt in index | 首页摘要><br>Markdown和Haroopad介绍文档<br><a id="more"></a></excerpt></p>
+<p><the rest of contents | 余下全文></the></p>
+<h1 id="Markdown和Haroopad介绍文档"><a href="#Markdown和Haroopad介绍文档" class="headerlink" title="Markdown和Haroopad介绍文档"></a>Markdown和Haroopad介绍文档</h1><p>[TOC “float:lift”]</p>
+<h2 id="什么是Markdown"><a href="#什么是Markdown" class="headerlink" title="什么是Markdown"></a>什么是Markdown</h2><p>Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。简而言之的说，它可以通过类似HTML的标记语法，使普通文本内容具有一定的格式。  </p>
+<h3 id="Markdown有哪些优点"><a href="#Markdown有哪些优点" class="headerlink" title="Markdown有哪些优点"></a>Markdown有哪些优点</h3><ul>
+<li>纯文本实现，使用任何文本编辑器均可编辑，全平台通用。</li>
+<li>排版清晰简洁，可读性较高，使用扩展可以获得更多语法格式支持，漂亮美观。</li>
+<li>语法简洁，上手较快，任何人均可在短时间内学会。即使不会语法的读者，也可以读懂其原始文件的内容。</li>
+<li>丰富的工具链支持：<ul>
+<li>编辑器：各种支持所见即所得的编辑器，如本文介绍的Haroopad。</li>
+<li>平台支持：各大博客系统、Wiki系统均有相关插件，代码托管平台Github也支持使用Markdown来编写Readme文件。</li>
+<li>和其他格式进行转化：可以方便的转化为HTML文件等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Markdown的基本语法"><a href="#Markdown的基本语法" class="headerlink" title="Markdown的基本语法"></a>Markdown的基本语法</h3><p>Markdown的基本语法非常简单，本文即用Markdown完成。  </p>
+<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>可以在标题内容前输入特定数量的井号(‘#’)来实现对应级别的HTML样式的标题(HTML提供六级标题)。例如：  </p>
+<pre><code># 一级标题  
+#### 四级标题  
+</code></pre><p>一级和二级标题还有一种写法：  </p>
+<pre><code>一级标题  
+===================  
+二级标题  
+--------------------  
+</code></pre><h4 id="特殊格式字体"><a href="#特殊格式字体" class="headerlink" title="特殊格式字体"></a>特殊格式字体</h4><p>在需要改变的文字片段前后 使用一对符号可以改变文字为特殊格式：  </p>
+<ul>
+<li>粗体     使用<code>**文字**</code>或者<code>__文字__</code>    效果：<strong>这里请大家尤其注意！</strong></li>
+<li>斜体     使用<code>*文字*</code>或者<code>_文字_</code>        效果：会不调用父类的 <em>析构函数</em> 呢？</li>
+<li>高亮     使用<code>==文字==</code>     效果：==这里是高亮的重点==，但这里不是。</li>
+<li>下划线    使用<code>++文字++</code>    效果：如果此时的++判断结果为真++……</li>
+<li>删除线    使用<code>~~文字~~</code>    效果：<del>1.2的版本已经修复这个Bug？</del></li>
+<li>上角标    使用<code>^文字^</code>    效果：单位圆的方程式是x^2^+y^2^=1。</li>
+<li>下角标    使用<code>~文字~</code>    效果：最常见的氧化反应是C+O~2~=CO~2~</li>
+</ul>
+<h4 id="外部内容嵌入"><a href="#外部内容嵌入" class="headerlink" title="外部内容嵌入"></a>外部内容嵌入</h4><ul>
+<li>图像 使用<code>![text](url)</code>来贴入图片 效果：<br><img src="http://www.sina.com/favicon.ico" alt="Favicon"></li>
+<li>链接 使用<code>[linkText](url)</code>来插入链接 效果：<br><a href="http://www.walkcd.com" target="_blank" rel="noopener">博客首页</a></li>
+<li>电子邮件 使用<code>&lt;邮件地址&gt;</code>来插入邮件地址 效果：<a href="mailto:&#99;&#100;&#115;&#x61;&#x6d;&#x61;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#99;&#100;&#115;&#x61;&#x6d;&#x61;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;</a></li>
+</ul>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><h5 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h5><p>使用如下格式(*+-可以任意替换):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* 第一章</span><br><span class="line">* 第二章</span><br><span class="line">    + 第一条</span><br><span class="line">    + 第二条</span><br><span class="line">        - 第一则</span><br></pre></td></tr></table></figure></p>
+<p>效果：  </p>
+<ul>
+<li>第一章</li>
+<li>第二章<ul>
+<li>第一条</li>
+<li>第二条<ul>
+<li>第一则</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h5><p>使用如下格式(即为效果)：  </p>
+<ol>
+<li>内容</li>
+<li>内容</li>
+<li>内容</li>
+</ol>
+<h4 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h4><p>简单表格如下，分号的位置表示对齐方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|这里是列名一|列二|三|</span><br><span class="line">|:-|:-:|-:|</span><br><span class="line">|这列是左对齐|这列是居中对齐|这列是右对齐|</span><br><span class="line">|左对齐|居中对齐|右对齐|</span><br></pre></td></tr></table></figure></p>
+<p>效果：<br>|这里是列名一|列二|三|<br>|:-|:-:|-:|<br>|这列是左对齐|这列是居中对齐|这列是右对齐|<br>|左对齐|居中对齐|右对齐|<br>|1|2|3|</p>
+<h4 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h4><p>以下三个连续符号构成一个分割线，分别是三种不同的分割线：<br><code>***</code><br><code>---</code><br><code>___</code><br>效果：  </p>
+<hr>
+<hr>
+<hr>
+<h4 id="换行、空格和标记符号"><a href="#换行、空格和标记符号" class="headerlink" title="换行、空格和标记符号"></a>换行、空格和标记符号</h4><p>在浏览器中一般情况下，Markdown会删除所有换行和空格，打乱原有的缩进和排版。通过回车和至少两个空格可以强制换行。<br>要打出连续空格可以用输入法输入全角中文空格或者：<br>半字大的空白<code></code>或<code></code><br>全字大的空白<code></code>或<code></code><br>不断行的空白格<code></code>或<code></code><br>若要输出符号原本的意思可以加斜线\来输出 例如：<br>* 不是列表  </p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>使用右尖括号即可插入一段引用，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 这里是一段引用</span><br><span class="line">&gt;&gt; 书是人类进步的阶梯。 --高尔基</span><br><span class="line">&gt;</span><br><span class="line">&gt; 退出二级引用</span><br></pre></td></tr></table></figure></p>
+<p>效果：  </p>
+<blockquote>
+<p>这里是一段引用</p>
+<blockquote>
+<p>书是人类进步的阶梯。 –高尔基</p>
+</blockquote>
+<p>退出二级引用</p>
+</blockquote>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>使用一对反引号即可包含一个行内代码使用一对三个反引号可以包括多行代码，另外多行Tab也可以用于代码段，例如：<br><code>code</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code blocks</span><br></pre></td></tr></table></figure></p>
+<p>效果：<code>print(&quot;hello&quot;);</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    std::cout&lt;&lt;&quot;hello world!&quot;&lt;&lt;std::endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Haroopad介绍"><a href="#Haroopad介绍" class="headerlink" title="Haroopad介绍"></a>Haroopad介绍</h2><p>Haroopad是一个韩国人写的Markdown编辑器，项目主页是：<br><a href="http://pad.haroopress.com/" target="_blank" rel="noopener">Haroopad - The Next Document processor based on Markdown</a></p>
+<h3 id="Haroopad的优点和缺点"><a href="#Haroopad的优点和缺点" class="headerlink" title="Haroopad的优点和缺点"></a>Haroopad的优点和缺点</h3><p>优点：</p>
+<ul>
+<li>跨Windows、Mac、Linux三大平台。</li>
+<li>支持实时渲染，可以在编写的时候实时查看效果。</li>
+<li>支持复制、导出到HTML。</li>
+<li>支持多种编程语言语法高亮。</li>
+<li>支持绘制各种流程时序图等非标准Markdown格式。</li>
+</ul>
+<p>缺点：  </p>
+<ul>
+<li>暂时不支持导出到PDF等格式</li>
+</ul>
+<h3 id="Haroopad支持的额外语法"><a href="#Haroopad支持的额外语法" class="headerlink" title="Haroopad支持的额外语法"></a>Haroopad支持的额外语法</h3><h4 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h4><p>单行插入[toc]或[TOC]即可生成目录  </p>
+<h4 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h4><p>使用<code>[^id]</code> <code>[^id]:text</code>即可生成一对脚注 <a href="这里是一个示例脚注。">^demo</a>  </p>
+<h4 id="代码语法高亮"><a href="#代码语法高亮" class="headerlink" title="代码语法高亮"></a>代码语法高亮</h4><p>在 ``` 后加入编程语言名称<br>例如<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```python</span><br><span class="line">@requires_authorization</span><br><span class="line">def somefunc(param1=&apos;&apos;, param2=0):</span><br><span class="line">    &apos;&apos;&apos;A docstring&apos;&apos;&apos;</span><br><span class="line">    if param1 &gt; param2: # interesting</span><br><span class="line">        print &apos;Greater&apos;</span><br><span class="line">    return (param2 - param1 + 1) or None</span><br><span class="line">class SomeClass:</span><br><span class="line">    pass</span><br><span class="line">&gt;&gt;&gt; message = &apos;&apos;&apos;interpreter</span><br><span class="line">... prompt&apos;&apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="计划任务列表"><a href="#计划任务列表" class="headerlink" title="计划任务列表"></a>计划任务列表</h4><p>使用<code>- [ ] task name</code> <code>- [x] finished task</code>来创建计划任务。<br>效果：  </p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 任务1</li>
+<li style="list-style: none"><input type="checkbox" checked> 任务2</li>
+</ul>
+<h4 id="图像绘制"><a href="#图像绘制" class="headerlink" title="图像绘制"></a>图像绘制</h4><p>图像绘制使用了mermaid引擎(<a href="https://github.com/knsv/mermaid" target="_blank" rel="noopener">访问该项目地址</a>)。<br>目前支持流程图和时序图，可以在该项目Wiki上查看更多用法，以下列举两个最基本的例子。<br>流程图：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">         subgraph 子图</span><br><span class="line">         a1[矩形]</span><br><span class="line">         a2&gt;旗帜形]</span><br><span class="line">         a3(圆角方形)</span><br><span class="line">         end</span><br><span class="line">         subgraph 第二个子图</span><br><span class="line">         b1((圆形))</span><br><span class="line">         b2&#123;斜方形&#125;</span><br><span class="line">         end</span><br><span class="line">         a1--&gt;|实线箭头|a2</span><br><span class="line">         a2--&gt;a1</span><br><span class="line">         a2-.-&gt;|虚线箭头|a3</span><br><span class="line">         a3-.-&gt;a2</span><br><span class="line">         a3==&gt;|加粗箭头|a1</span><br><span class="line">         a1==&gt;a3</span><br><span class="line">         b1---b2</span><br><span class="line">         b2---|实线无箭头|b1</span><br><span class="line">         a1--&gt;b1</span><br></pre></td></tr></table></figure>
+<p>时序图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">        Alice-&gt;&gt;Bob: Hello Bob, how are you?</span><br><span class="line">        alt is sick</span><br><span class="line">            Bob-&gt;&gt;Alice: Not so good :(</span><br><span class="line">        else is well</span><br><span class="line">            Bob-&gt;&gt;Alice: Feeling fresh like a daisy</span><br><span class="line">        end</span><br><span class="line">        opt Extra response</span><br><span class="line">            Bob-&gt;&gt;Alice: Thanks for asking</span><br><span class="line">        end</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://blog.csdn.net/tao_627/article/details/50625436" target="_blank" rel="noopener">http://blog.csdn.net/tao_627/article/details/50625436</a>  </p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/03/05/Markdown和Haroopad介绍文档/">Markdown和Haroopad介绍文档</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 laijinxian 的个人博客">laijinxian</a></p>
+        <p><span>发布时间:</span>2019年03月05日 - 18时39分</p>
+        <p><span>最后更新:</span>2019年03月05日 - 19时17分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/05/Markdown和Haroopad介绍文档/" title="Markdown和Haroopad介绍文档">http://yoursite.com/2019/03/05/Markdown和Haroopad介绍文档/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/05/Markdown和Haroopad介绍文档/　　作者: laijinxian" title></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/04/Jenkins-自动部署前端项目/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jenkins 结合 shell脚本 自动部署前端项目</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markdown和Haroopad介绍文档"><span class="toc-number">1.</span> <span class="toc-text">Markdown和Haroopad介绍文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Markdown"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Markdown</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Markdown有哪些优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">Markdown有哪些优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Markdown的基本语法"><span class="toc-number">1.1.2.</span> <span class="toc-text">Markdown的基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标题"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊格式字体"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">特殊格式字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#外部内容嵌入"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">外部内容嵌入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#列表"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#无序列表"><span class="toc-number">1.1.2.4.1.</span> <span class="toc-text">无序列表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#有序列表"><span class="toc-number">1.1.2.4.2.</span> <span class="toc-text">有序列表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表格"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">表格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分割线"><span class="toc-number">1.1.2.6.</span> <span class="toc-text">分割线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#换行、空格和标记符号"><span class="toc-number">1.1.2.7.</span> <span class="toc-text">换行、空格和标记符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用"><span class="toc-number">1.1.2.8.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-number">1.1.2.9.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Haroopad介绍"><span class="toc-number">1.2.</span> <span class="toc-text">Haroopad介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Haroopad的优点和缺点"><span class="toc-number">1.2.1.</span> <span class="toc-text">Haroopad的优点和缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Haroopad支持的额外语法"><span class="toc-number">1.2.2.</span> <span class="toc-text">Haroopad支持的额外语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#目录"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#脚注"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">脚注</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码语法高亮"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">代码语法高亮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计划任务列表"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">计划任务列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图像绘制"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">图像绘制</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/03/04/Jenkins-自动部署前端项目/" title="下一篇: Jenkins 结合 shell脚本 自动部署前端项目">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/05/Markdown和Haroopad介绍文档/">Markdown和Haroopad介绍文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Jenkins-自动部署前端项目/">Jenkins 结合 shell脚本 自动部署前端项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/Git-reset-笔记/">Git reset 笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/Git-GitLab-使用及规范/">Git && GitLab 使用及规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/Git常规使用方法/">Git常规使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/25/First Day/">First day</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 laijinxian
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

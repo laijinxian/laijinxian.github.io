@@ -7,20 +7,20 @@
   
   
   
-  <title>web 应用常见安全漏洞一览 | 正在奔跑的前端小白</title>
+  <title>web 应用常见安全漏洞 | 正在奔跑的前端小白</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="web 应用常见安全漏洞一览： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
+  <meta name="description" content="web 应用常见安全漏洞： 作为Web端开发，不了解些攻击及漏洞有点说不过去，今天就来总结下常见的漏洞">
 <meta name="keywords" content="web安全问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web 应用常见安全漏洞一览">
+<meta property="og:title" content="web 应用常见安全漏洞">
 <meta property="og:url" content="http://yoursite.com/2019/03/04/Web-应用常见安全漏洞详解/index.html">
 <meta property="og:site_name" content="正在奔跑的前端小白">
-<meta property="og:description" content="web 应用常见安全漏洞一览： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
+<meta property="og:description" content="web 应用常见安全漏洞： 作为Web端开发，不了解些攻击及漏洞有点说不过去，今天就来总结下常见的漏洞">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-04T09:44:00.788Z">
+<meta property="og:updated_time" content="2019-03-04T10:13:51.842Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="web 应用常见安全漏洞一览">
-<meta name="twitter:description" content="web 应用常见安全漏洞一览： 使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit">
+<meta name="twitter:title" content="web 应用常见安全漏洞">
+<meta name="twitter:description" content="web 应用常见安全漏洞： 作为Web端开发，不了解些攻击及漏洞有点说不过去，今天就来总结下常见的漏洞">
   
     <link rel="alternative" href="/atom.xml" title="正在奔跑的前端小白" type="application/atom+xml">
   
@@ -191,7 +191,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Git-GitLab-GitHub/" style="font-size: 20px;">Git/GitLab/GitHub</a> <a href="/tags/web安全问题/" style="font-size: 10px;">web安全问题</a> <a href="/tags/日常/" style="font-size: 10px;">日常</a>
+                        <a href="/tags/Git-GitLab-GitHub/" style="font-size: 20px;">Git/GitLab/GitHub</a> <a href="/tags/Jenkins-shell/" style="font-size: 10px;">Jenkins/shell</a> <a href="/tags/Markdown-Haroopad/" style="font-size: 10px;">Markdown/Haroopad</a> <a href="/tags/web安全问题/" style="font-size: 10px;">web安全问题</a> <a href="/tags/日常/" style="font-size: 10px;">日常</a>
                     </div>
                 </section>
                 
@@ -276,7 +276,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      web 应用常见安全漏洞一览
+      web 应用常见安全漏洞
     </h1>
   
 
@@ -302,7 +302,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong> web 应用常见安全漏洞一览：</strong> <excerpt in index | 首页摘要><br>使用 Git 提交代码时，或多或少会遇到过这次的提交不对想重新提交，并且不想再log里显示；今天就说说怎么撤销 commit<br><a id="more"></a></excerpt></p>
+        <p><strong> web 应用常见安全漏洞：</strong> <excerpt in index | 首页摘要><br>作为Web端开发，不了解些攻击及漏洞有点说不过去，今天就来总结下常见的漏洞<br><a id="more"></a></excerpt></p>
 <p><the rest of contents | 余下全文></the></p>
 <h2 id="1、SQL-注入"><a href="#1、SQL-注入" class="headerlink" title="1、SQL 注入"></a>1、SQL 注入</h2><p>SQL 注入就是通过给 web 应用接口传入一些特殊字符，达到欺骗服务器执行恶意的 SQL 命令。<br>SQL 注入漏洞属于后端的范畴，但前端也可做体验上的优化。</p>
 <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>当使用外部不可信任的数据作为参数进行数据库的增、删、改、查时，如果未对外部数据进行过滤，就会产生 SQL 注入漏洞。<br>比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">"外部输入名称"</span></span><br><span class="line">sql = <span class="string">"select * from users where name="</span>+ name;</span><br></pre></td></tr></table></figure></p>
@@ -433,8 +433,8 @@
 <hr>
 <p>参考链接 </p>
 <ol>
-<li><a href="https://segmentfault.com/a/1190000018004657" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018004657</a></li>
-<li><a href="https://blog.shijukun.com/2018/09/25/soft/" target="_blank" rel="noopener">https://blog.shijukun.com/2018/09/25/soft/</a></li>
+<li><a href="https://segmentfault.com/a/1190000018004657" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018004657</a> 作者：  深予之 </li>
+<li><a href="https://blog.shijukun.com/2018/09/25/soft/" target="_blank" rel="noopener">https://blog.shijukun.com/2018/09/25/soft/</a>   作者：  Shiju</li>
 </ol>
 
       
@@ -444,12 +444,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞一览</a></p>
+        <p><span>本文标题:</span><a href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 laijinxian 的个人博客">laijinxian</a></p>
         <p><span>发布时间:</span>2019年03月04日 - 11时06分</p>
-        <p><span>最后更新:</span>2019年03月04日 - 17时44分</p>
+        <p><span>最后更新:</span>2019年03月04日 - 18时13分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/03/04/Web-应用常见安全漏洞详解/" title="web 应用常见安全漏洞一览">http://yoursite.com/2019/03/04/Web-应用常见安全漏洞详解/</a>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/04/Web-应用常见安全漏洞详解/" title="web 应用常见安全漏洞">http://yoursite.com/2019/03/04/Web-应用常见安全漏洞详解/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/04/Web-应用常见安全漏洞详解/　　作者: laijinxian" title></span>
         </p>
         <p>
@@ -460,6 +460,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2019/03/04/Jenkins-自动部署前端项目/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Jenkins 结合 shell脚本 自动部署前端项目
+        
+      </div>
+    </a>
   
   
     <a href="/2019/03/01/Git-reset-笔记/" id="article-nav-older" class="article-nav-link-wrap">
@@ -548,7 +557,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2019/03/04/Jenkins-自动部署前端项目/" title="上一篇: Jenkins 结合 shell脚本 自动部署前端项目">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
@@ -557,7 +568,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/Git-reset-笔记/">Git reset 笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/Git-GitLab-使用及规范/">Git && GitLab 使用及规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/Git常规使用方法/">Git常规使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/25/First Day/">First day</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/05/Markdown和Haroopad介绍文档/">Markdown和Haroopad介绍文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Jenkins-自动部署前端项目/">Jenkins 结合 shell脚本 自动部署前端项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/Git-reset-笔记/">Git reset 笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/Git-GitLab-使用及规范/">Git && GitLab 使用及规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/Git常规使用方法/">Git常规使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/25/First Day/">First day</a></li></ul>
     
 <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 

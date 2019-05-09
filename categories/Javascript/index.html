@@ -188,7 +188,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Es6/" style="font-size: 10px;">Es6</a> <a href="/tags/Git-GitLab-GitHub/" style="font-size: 20px;">Git/GitLab/GitHub</a> <a href="/tags/Jenkins-shell/" style="font-size: 10px;">Jenkins/shell</a> <a href="/tags/Markdown-Haroopad/" style="font-size: 10px;">Markdown/Haroopad</a> <a href="/tags/web前端开发规范及开发文档/" style="font-size: 10px;">web前端开发规范及开发文档</a> <a href="/tags/web安全问题/" style="font-size: 10px;">web安全问题</a> <a href="/tags/日常/" style="font-size: 10px;">日常</a>
+                        <a href="/tags/Es6/" style="font-size: 10px;">Es6</a> <a href="/tags/Git-GitLab-GitHub/" style="font-size: 20px;">Git/GitLab/GitHub</a> <a href="/tags/Jenkins-shell/" style="font-size: 10px;">Jenkins/shell</a> <a href="/tags/Markdown-Haroopad/" style="font-size: 10px;">Markdown/Haroopad</a> <a href="/tags/vue-vuex/" style="font-size: 15px;">vue/vuex</a> <a href="/tags/web前端开发规范及开发文档/" style="font-size: 10px;">web前端开发规范及开发文档</a> <a href="/tags/web安全问题/" style="font-size: 10px;">web安全问题</a> <a href="/tags/日常/" style="font-size: 15px;">日常</a>
                     </div>
                 </section>
                 
@@ -398,6 +398,53 @@ ga('send', 'pageview');
         if ($("#comments").length < 1) {
             $("#scroll > a:nth-child(2)").hide();
         };
+    })
+</script>
+
+    <button class="hide-labels">TAG 开关</button>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("button").click(function() {
+                $(".article-info").toggle(200);
+            });
+        });
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>;
     })
 </script>
 

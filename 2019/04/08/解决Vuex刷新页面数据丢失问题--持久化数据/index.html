@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl">
+  
+  
+  
+  
+  <title>解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据 | 正在奔跑的前端小白</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据： 页面刷新后，Vuex共享的数据发现也重置了，这是正常现象，若没丢失才是不正常。">
+<meta name="keywords" content="vue&#x2F;vuex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/解决Vuex刷新页面数据丢失问题--持久化数据/index.html">
+<meta property="og:site_name" content="正在奔跑的前端小白">
+<meta property="og:description" content="解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据： 页面刷新后，Vuex共享的数据发现也重置了，这是正常现象，若没丢失才是不正常。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-07T10:25:26.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据">
+<meta name="twitter:description" content="解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据： 页面刷新后，Vuex共享的数据发现也重置了，这是正常现象，若没丢失才是不正常。">
+  
+    <link rel="alternative" href="/atom.xml" title="正在奔跑的前端小白" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/BigGitHub.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/laijinxian.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">laijinxian</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">赖金贤</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/laijinxian" title="github">github</a>
+                            
+                                <a class="fl rss" target="_blank" href="https://www.cnblogs.com/ljx20180807/" title="rss">rss</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/5658398179/profile?topnav=1&wvr=6&is_all=1" title="weibo">weibo</a>
+                            
+                                <a class="fl wechat" target="_blank" href="/archives/" title="wechat">wechat</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Es6/" style="font-size: 10px;">Es6</a> <a href="/tags/Git-GitLab-GitHub/" style="font-size: 20px;">Git/GitLab/GitHub</a> <a href="/tags/Jenkins-shell/" style="font-size: 10px;">Jenkins/shell</a> <a href="/tags/Markdown-Haroopad/" style="font-size: 10px;">Markdown/Haroopad</a> <a href="/tags/vue-vuex/" style="font-size: 15px;">vue/vuex</a> <a href="/tags/web前端开发规范及开发文档/" style="font-size: 10px;">web前端开发规范及开发文档</a> <a href="/tags/web安全问题/" style="font-size: 10px;">web安全问题</a> <a href="/tags/日常/" style="font-size: 15px;">日常</a>
+                    </div>
+                </section>
+                
+                
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">太多了</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">laijinxian</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/laijinxian.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">laijinxian</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">赖金贤</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/laijinxian" title="github">github</a>
+                    
+                        <a class="rss" target="_blank" href="https://www.cnblogs.com/ljx20180807/" title="rss">rss</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/5658398179/profile?topnav=1&wvr=6&is_all=1" title="weibo">weibo</a>
+                    
+                        <a class="wechat" target="_blank" href="/archives/" title="wechat">wechat</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-解决Vuex刷新页面数据丢失问题--持久化数据" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/08/解决Vuex刷新页面数据丢失问题--持久化数据/" class="article-date">
+      <time datetime="2019-04-08T07:53:32.000Z" itemprop="datePublished">2019-04-08</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-vuex/">vue/vuex</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong> 解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据：</strong> <excerpt in index | 首页摘要><br>页面刷新后，Vuex共享的数据发现也重置了，这是正常现象，若没丢失才是不正常。<br><a id="more"></a></excerpt></p>
+<p><the rest of contents | 余下全文></the></p>
+<h1 id="何为Vuex？用处是什么？为什么刷新丢失？"><a href="#何为Vuex？用处是什么？为什么刷新丢失？" class="headerlink" title="何为Vuex？用处是什么？为什么刷新丢失？"></a>何为Vuex？用处是什么？为什么刷新丢失？</h1><blockquote>
+<ol>
+<li>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化 –官方回答</li>
+<li>组件化开发作为前后端分离模式的一大特点但也伴随组件之间的通信的问题，当项目庞大、数据共享场景多、多层组件通信时，这时它就应该出现了，它为开发者提供简便的数据共享中心，不用再去纠结组件之间怎么传递数据了</li>
+<li>刷新页面数据没了，咋那么怪异？？？作为共享数据管理，不应该是一直存在的么？刚开始时至少我是这样认为的！随着翻阅资料发现就应该是这结果，要是刷新页面数据不丢失就不正常了；因为我们JS的数据都是保存在浏览器的堆栈内存里面的，倘若刷新页面数据不丢失，那堆栈里的数据何时消失呢，项目一大全部数据都保留在浏览器堆栈，浏览器不炸不卡死科学么？有那么大内存的浏览器么？刷新浏览器页面，以前堆栈申请的内存被释放！这就是浏览器的运行机制。想通JS运行机制时，发现一些都能理解了。</li>
+</ol>
+</blockquote>
+<h1 id="页面刷新数据丢失既然是正常现象，那考虑的就应该是如何持久化数据了。"><a href="#页面刷新数据丢失既然是正常现象，那考虑的就应该是如何持久化数据了。" class="headerlink" title="页面刷新数据丢失既然是正常现象，那考虑的就应该是如何持久化数据了。"></a>页面刷新数据丢失既然是正常现象，那考虑的就应该是如何持久化数据了。</h1><blockquote>
+<ol>
+<li>手动使用localStorage、sessionStorage就可以了；</li>
+<li>既然用了Vuex那肯定就要用它相关的插件去实现嘛，这才说得过去，Vuex有2个插件去持久化数据：<ul>
+<li>vuex-persistedstate （接下来要讲的） 官链 <a href="https://www.npmjs.com/package/vuex-persistedstate" target="_blank" rel="noopener">https://www.npmjs.com/package/vuex-persistedstate</a></li>
+<li>vuex-persist</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h1 id="我项目用的是vuex-persistedstate-所以就来讲讲这插件的用法了"><a href="#我项目用的是vuex-persistedstate-所以就来讲讲这插件的用法了" class="headerlink" title="我项目用的是vuex-persistedstate 所以就来讲讲这插件的用法了"></a>我项目用的是vuex-persistedstate 所以就来讲讲这插件的用法了</h1><h2 id="如何引入这里就不说了，详情看上面官方链接"><a href="#如何引入这里就不说了，详情看上面官方链接" class="headerlink" title="如何引入这里就不说了，详情看上面官方链接"></a>如何引入这里就不说了，详情看上面官方链接</h2><h2 id="在我们使用Vuex的地方index-js里引入-我这没有区分开-state-和-mutations-写在一个文件里"><a href="#在我们使用Vuex的地方index-js里引入-我这没有区分开-state-和-mutations-写在一个文件里" class="headerlink" title="在我们使用Vuex的地方index.js里引入 我这没有区分开  state 和 mutations 写在一个文件里"></a>在我们使用Vuex的地方index.js里引入 我这没有区分开  state 和 mutations 写在一个文件里</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">import Vue from <span class="string">'vue'</span></span><br><span class="line">import Vuex from <span class="string">'vuex'</span></span><br><span class="line">import actions from <span class="string">'./actions'</span></span><br><span class="line">import CreatePersistedState from <span class="string">'vuex-persistedstate'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">const state = &#123;</span><br><span class="line">  <span class="comment"># // loading</span></span><br><span class="line">  showHttpLoading: <span class="literal">false</span>,</span><br><span class="line">  <span class="comment"># // 用户code</span></span><br><span class="line">  userCode: <span class="string">''</span>,</span><br><span class="line">  <span class="comment"># // unionId</span></span><br><span class="line">  unionId: <span class="string">''</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const mutations = &#123;</span><br><span class="line">  <span class="comment"># // loading</span></span><br><span class="line">  UPDATE_SHOW_HTTP_LOADING (_state, val) &#123;</span><br><span class="line">    _state.showHttpLoading = val</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment"># // 保存 code</span></span><br><span class="line">  SAVE_USER_CODE (_state, val) &#123;</span><br><span class="line">    _state.userCode = val</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment"># // 保存 unionId</span></span><br><span class="line">  SAVE_USER_UNIONID (_state, val) &#123;</span><br><span class="line">    _state.unionId = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># // vuex-persistedstate默认持久化所有state 若不需要全部则把需要持久化的数据放到reducer里 比如 showHttpLoading、unionId 需要持久化 userCode不需要则不需要加入</span></span><br><span class="line">const vuexPersisted = new CreatePersistedState(&#123;</span><br><span class="line">  key: <span class="string">'VuexPersisted'</span>,</span><br><span class="line">  storage: window.sessionStorage, <span class="comment"># // 可选择 localStorage、sessionStorage、cookie 看需求 </span></span><br><span class="line">  reducer: state =&gt; (&#123;</span><br><span class="line">    <span class="comment"># // loading</span></span><br><span class="line">    showHttpLoading: state.showHttpLoading,</span><br><span class="line">    <span class="comment"># // unionId</span></span><br><span class="line">    unionId: state.unionId,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># // 向外暴露store对象</span></span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">  state,</span><br><span class="line">  mutations,</span><br><span class="line">  actions,</span><br><span class="line">  plugins: [vuexPersisted]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="如果此刻想配置多个选项，将plugins写成一个一维数组，不然会报错"><a href="#如果此刻想配置多个选项，将plugins写成一个一维数组，不然会报错" class="headerlink" title="如果此刻想配置多个选项，将plugins写成一个一维数组，不然会报错"></a>如果此刻想配置多个选项，将plugins写成一个一维数组，不然会报错</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import CreatePersistedState from <span class="string">'vuex-persistedstate'</span></span><br><span class="line">import createLogger from <span class="string">'vuex/dist/logger'</span></span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">  state,</span><br><span class="line">  mutations,</span><br><span class="line">  actions,</span><br><span class="line">  plugins: [createLogger(), createPersisted]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/04/08/解决Vuex刷新页面数据丢失问题--持久化数据/">解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 laijinxian 的个人博客">laijinxian</a></p>
+        <p><span>发布时间:</span>2019年04月08日 - 15时53分</p>
+        <p><span>最后更新:</span>2019年05月07日 - 18时25分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/04/08/解决Vuex刷新页面数据丢失问题--持久化数据/" title="解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据">http://yoursite.com/2019/04/08/解决Vuex刷新页面数据丢失问题--持久化数据/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/04/08/解决Vuex刷新页面数据丢失问题--持久化数据/　　作者: laijinxian" title></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2019/05/07/PC调用摄像头拍照人脸录入、移动端调用手机摄像头人脸录入/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          vue实现PC端调用摄像头拍照、移动端调用手机前置摄像头人脸录入、及图片旋转矫正、压缩上传base64格式/文件格式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/09/Javascript-Es6-新特性详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Javascript Es6 新特性详解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#何为Vuex？用处是什么？为什么刷新丢失？"><span class="toc-number">1.</span> <span class="toc-text">何为Vuex？用处是什么？为什么刷新丢失？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#页面刷新数据丢失既然是正常现象，那考虑的就应该是如何持久化数据了。"><span class="toc-number">2.</span> <span class="toc-text">页面刷新数据丢失既然是正常现象，那考虑的就应该是如何持久化数据了。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我项目用的是vuex-persistedstate-所以就来讲讲这插件的用法了"><span class="toc-number">3.</span> <span class="toc-text">我项目用的是vuex-persistedstate 所以就来讲讲这插件的用法了</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何引入这里就不说了，详情看上面官方链接"><span class="toc-number">3.1.</span> <span class="toc-text">如何引入这里就不说了，详情看上面官方链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在我们使用Vuex的地方index-js里引入-我这没有区分开-state-和-mutations-写在一个文件里"><span class="toc-number">3.2.</span> <span class="toc-text">在我们使用Vuex的地方index.js里引入 我这没有区分开  state 和 mutations 写在一个文件里</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如果此刻想配置多个选项，将plugins写成一个一维数组，不然会报错"><span class="toc-number">3.3.</span> <span class="toc-text">如果此刻想配置多个选项，将plugins写成一个一维数组，不然会报错</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/05/07/PC调用摄像头拍照人脸录入、移动端调用手机摄像头人脸录入/" title="上一篇: vue实现PC端调用摄像头拍照、移动端调用手机前置摄像头人脸录入、及图片旋转矫正、压缩上传base64格式/文件格式">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/03/09/Javascript-Es6-新特性详解/" title="下一篇: Javascript Es6 新特性详解">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/05/07/PC调用摄像头拍照人脸录入、移动端调用手机摄像头人脸录入/">vue实现PC端调用摄像头拍照、移动端调用手机前置摄像头人脸录入、及图片旋转矫正、压缩上传base64格式/文件格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/08/解决Vuex刷新页面数据丢失问题--持久化数据/">解决Vuex刷新页面数据丢失问题--vuex-persistedstate持久化数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/09/Javascript-Es6-新特性详解/">Javascript Es6 新特性详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/前端开发规范及开发文档/">前端开发规范及开发文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/05/Markdown和Haroopad介绍文档/">Markdown和Haroopad介绍文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Jenkins-自动部署前端项目/">Jenkins 结合 shell脚本 自动部署前端项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Web-应用常见安全漏洞详解/">web 应用常见安全漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/Git-reset-笔记/">Git reset 笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/Git-GitLab-使用及规范/">Git && GitLab 使用及规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/Git常规使用方法/">Git常规使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/25/加入 --- hexo 第一天/">First day</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/25/博客搬家至hexo/">First day</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 laijinxian
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

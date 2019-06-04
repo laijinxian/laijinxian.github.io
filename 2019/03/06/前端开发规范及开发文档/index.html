@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="正在奔跑的前端小白">
 <meta property="og:description" content="前端开发规范及开发文档： 团队之间一致的开发习惯;统一的代码风格;对团队合作、工作效率以及后期的维护有着很大的提高；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-08T07:49:12.245Z">
+<meta property="og:updated_time" content="2019-06-04T08:25:36.667Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端开发规范及开发文档">
 <meta name="twitter:description" content="前端开发规范及开发文档： 团队之间一致的开发习惯;统一的代码风格;对团队合作、工作效率以及后期的维护有着很大的提高；">
@@ -358,6 +358,14 @@
 <p>9、代码结构明了，加适量注释.提高函数重用率。</p>
 <p>10、注重与html分离，减小reflow，注重浏览器性能。</p>
 <p>11、注释 （尽量提高代码本身的清晰性、可读性，合理的注释、空行排版等，可以让代码更易阅读、更具美感）</p>
+<p>12、利用缓存存放数据、资源压缩、避免高频刷新页面、静态资源上传cdn</p>
+<p>13、设置响应头cache-control和last-modified（如果两次请求间隔小于5秒，直接返回304，不需要服务器进行处理）</p>
+<p>14、Web服务器的负载均衡、请求分发（七层负载均衡的实现）、上传文件使用异步模式</p>
+<p>15、将活动页面上的所有可以静态的元素全部静态化，并尽量减少动态元素。通过CDN来抗峰值</p>
+<p>16、用户提交之后按钮置灰，禁止重复提交 </p>
+<p>17、在某一时间段内只允许用户提交一次请求，比如可以采取IP限流</p>
+<p>18、图片在一个页面上属于数据量比较大的东西，尽量避免动态数据和图片的顺序渲染，使用图片服务器分离数据和图片（建立独立图片服务器）</p>
+<p>19、使用nginx等负载均衡中间件，将请求分布到不同的机器上，避免单个应用持续的处理引起血崩</p>
 <h3 id="单行注释"><a href="#单行注释" class="headerlink" title="单行注释"></a>单行注释</h3><p>必须独占一行。// 后跟一个空格，缩进与下一行被注释说明的代码一致。</p>
 <h3 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h3><p>避免使用 /<em>…</em>/ 这样的多行注释。有多行注释内容时，使用多个单行注释。</p>
 <p>函数/方法注释</p>
@@ -381,7 +389,7 @@
         <p><span>本文标题:</span><a href="/2019/03/06/前端开发规范及开发文档/">前端开发规范及开发文档</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 laijinxian 的个人博客">laijinxian</a></p>
         <p><span>发布时间:</span>2019年03月06日 - 10时12分</p>
-        <p><span>最后更新:</span>2019年03月08日 - 15时49分</p>
+        <p><span>最后更新:</span>2019年06月04日 - 16时25分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/03/06/前端开发规范及开发文档/" title="前端开发规范及开发文档">http://yoursite.com/2019/03/06/前端开发规范及开发文档/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/06/前端开发规范及开发文档/　　作者: laijinxian" title></span>
